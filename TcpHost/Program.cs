@@ -1,8 +1,9 @@
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using TcpHost;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Logging.ClearProviders().AddNLog(NLogConfig.Default);
+builder.Logging.ClearProviders().AddNLog(NLogConfig.Default).AddFilter("Microsoft.*", LogLevel.Warning);
 builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();
